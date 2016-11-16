@@ -10,9 +10,6 @@ LABEL Description="This image is used to start Atlassian Confluence" Vendor="Atl
 
 ENV CONFLUENCE_DOWNLOAD_URL http://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-${CONF_VERSION}.tar.gz
 
-ENV MYSQL_VERSION 5.1.38
-ENV MYSQL_DRIVER_DOWNLOAD_URL http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MYSQL_VERSION}.tar.gz
-
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
 # here we only ever run one process anyway.
@@ -31,7 +28,6 @@ RUN set -x \
     && chown ${RUN_USER}:${RUN_GROUP}     "${CONFLUENCE_HOME}" \
     && mkdir -p                           "${CONFLUENCE_INSTALL}/conf" \
     && curl -Ls                           "${CONFLUENCE_DOWNLOAD_URL}" | tar -xz --directory "${CONFLUENCE_INSTALL}" --strip-components=1 --no-same-owner \
-    && curl -Ls                           "${MYSQL_DRIVER_DOWNLOAD_URL}" | tar -xz --directory "${CONFLUENCE_INSTALL}/confluence/WEB-INF/lib" --strip-components=1 --no-same-owner "mysql-connector-java-${MYSQL_VERSION}/mysql-connector-java-${MYSQL_VERSION}-bin.jar" \
     && chmod -R 700                       "${CONFLUENCE_INSTALL}/conf" \
     && chmod -R 700                       "${CONFLUENCE_INSTALL}/temp" \
     && chmod -R 700                       "${CONFLUENCE_INSTALL}/logs" \
