@@ -1,11 +1,11 @@
 version: '2'
 services:
-  nginx:
-    build: ./nginx
-    ports:
-      - '80:80'
-    links:
-      - confluence
+  # nginx:
+    # build: ./nginx
+    # ports:
+      # - '80:80'
+    # links:
+      # - confluence
   confluence:
     build: ./confluence
     ports:
@@ -13,3 +13,9 @@ services:
       - '8091:8091'
     volumes:
       - ./data/confluence-home:/var/atlassian/application-data/confluence
+  postgres:
+    build: ./postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
