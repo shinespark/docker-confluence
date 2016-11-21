@@ -8,16 +8,6 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     volumes_from:
       - confluence:ro
-  # nginx:
-    # build: ./nginx
-    # links:
-      # - confluence
-    # ports:
-      # - '80:80'
-    # volumes:
-      # - /var/run/docker.sock:/tmp/docker.sock:ro
-    # volumes_from:
-      # - confluence:ro
   confluence:
     build: ./confluence
     environment:
