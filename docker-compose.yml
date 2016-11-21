@@ -13,4 +13,3 @@ services:
       - '8091:8091'
     volumes:
       - ./data/confluence-home:/var/atlassian/application-data/confluence
-      - ./data/confluence-install:/opt/atlassian/confluence
