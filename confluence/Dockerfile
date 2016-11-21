@@ -54,6 +54,8 @@ RUN set -x \
 # here we only ever run one process anyway.
 USER ${RUN_USER}:${RUN_GROUP}
 
+COPY ./server.xml ${CONFLUENCE_INSTALL}/conf/
+
 # Expose default HTTP connector port.
 EXPOSE 8090
 
