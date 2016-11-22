@@ -21,7 +21,7 @@ ENV RUN_GROUP           daemon
 # directory structure.
 RUN set -x \
     && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends libtcnative-1 xmlstarlet \
+    && apt-get install --quiet --yes --no-install-recommends apt-utils libtcnative-1 xmlstarlet \
     && apt-get clean \
     && mkdir -p                           "${CONFLUENCE_HOME}" \
     && chmod -R 700                       "${CONFLUENCE_HOME}" \
