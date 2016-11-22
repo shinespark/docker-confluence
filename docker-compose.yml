@@ -13,8 +13,6 @@ services:
     environment:
       - VIRTUAL_HOST=confluence.local
       - VIRTUAL_PORT=8090
-    links:
-      - postgres
     ports:
       - '8090:8090'
     volumes:
