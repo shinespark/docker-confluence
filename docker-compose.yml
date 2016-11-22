@@ -19,10 +19,3 @@ services:
       - '8090:8090'
     volumes:
       - ./data/confluence-home:/var/atlassian/application-data/confluence
-  postgres:
-    build: ./postgres
-    ports:
-      - '5432:5432'
-    restart: always
-    volumes:
-      - ./data/postgres:/var/lib/postgresql/data
