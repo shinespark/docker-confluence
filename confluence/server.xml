@@ -4,7 +4,7 @@
     <Connector port="8090" connectionTimeout="20000" redirectPort="8443" maxThreads="48" minSpareThreads="10" enableLookups="false" acceptCount="10" URIEncoding="UTF-8" protocol="org.apache.coyote.http11.Http11NioProtocol"/>
     <Engine name="Standalone" defaultHost="localhost">
       <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="false">
-        <Context path="" docBase="../confluence" reloadable="false" useHttpOnly="true">
+        <Context path="/confluence" docBase="../confluence" reloadable="false" useHttpOnly="true">
           <!-- Logger is deprecated in Tomcat 5.5. Logging configuration for Confluence is specified in confluence/WEB-INF/classes/log4j.properties -->
           <Manager pathname=""/>
           <Valve className="org.apache.catalina.valves.StuckThreadDetectionValve" threshold="60"/>
