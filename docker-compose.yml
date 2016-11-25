@@ -13,5 +13,5 @@ services:
     build: ./confluence
     ports:
       - '8090:8090'
-    # volumes:
-      # - ./data/confluence-home:/var/atlassian/application-data/confluence
+    volumes:
+      - ./data/confluence-home:/var/atlassian/application-data/confluence
