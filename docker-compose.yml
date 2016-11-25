@@ -1,17 +1,17 @@
 version: '2'
 services:
-  nginx-proxy:
-    build: ./nginx-proxy
+  nginx:
+    build: ./nginx
+    links:
+      - confluence
     ports:
       - '80:80'
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - .data/confluence-home:/var/atlassian/application-data/confluence
     volumes_from:
       - confluence:ro
   confluence:
     build: ./confluence
-    environment:
-      - VIRTUAL_HOST=confluence.local
-      - VIRTUAL_PORT=8090
     ports:
       - '8090:8090'
