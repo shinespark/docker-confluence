@@ -1,0 +1,17 @@
+version: '2'
+services:
+  nginx:
+    build: ./nginx
+    links:
+      - confluence
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  confluence:
+    build: ./confluence
+    ports:
+      - '8090:8090'
+    # volumes:
+      # - ./data/confluence-home:/var/atlassian/application-data/confluence
