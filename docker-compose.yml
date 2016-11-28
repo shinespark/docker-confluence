@@ -11,6 +11,8 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
   confluence:
     build: ./confluence
+    environment:
+      CONFLUENCE_CATALINA_MEM: 2048
     ports:
       - '8090:8090'
     volumes:

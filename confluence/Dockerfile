@@ -4,6 +4,7 @@ MAINTAINER Atlassian Confluence
 # Setup useful environment variables
 ENV CONFLUENCE_HOME     /var/atlassian/application-data/confluence
 ENV CONFLUENCE_INSTALL  /opt/atlassian/confluence
+ENV CONFLUENCE_CATALINA_MEM  1024
 ENV CONF_VERSION  5.10.8
 
 LABEL Description="This image is used to start Atlassian Confluence" Vendor="Atlassian" Version="${CONF_VERSION}"
@@ -54,6 +55,7 @@ RUN set -x \
 # here we only ever run one process anyway.
 USER ${RUN_USER}:${RUN_GROUP}
 
+COPY ./setenv.sh  ${CONFLUENCE_INSTALL}/bin/
 COPY ./server.xml ${CONFLUENCE_INSTALL}/conf/
 
 # Expose default HTTP connector port.
