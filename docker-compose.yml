@@ -12,7 +12,10 @@ services:
   confluence:
     build: ./confluence
     environment:
+      CONFLUENCE_HOSTNAME: "confluence.local"
       CONFLUENCE_CATALINA_MEM: 2048
+    extra_hosts:
+      - "confluence.local:127.0.0.1"
     ports:
       - '8090:8090'
     volumes:

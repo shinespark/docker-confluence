@@ -44,6 +44,9 @@ CATALINA_OPTS="-Djava.awt.headless=true ${CATALINA_OPTS}"
 CATALINA_OPTS="-Datlassian.plugins.enable.wait=300 ${CATALINA_OPTS}"
 CATALINA_OPTS="-Xms${CONFLUENCE_CATALINA_MEM}m -Xmx${CONFLUENCE_CATALINA_MEM}m -XX:+UseG1GC ${CATALINA_OPTS}"
 
+# For macro titles
+CATALINA_OPTS="-Dconfluence.document.conversion.fontpath=${JAVA_HOME}/lib/fonts/fallback ${CATALINA_OPTS}"
+CATALINA_OPTS="-Dconfluence.document.conversion.slides.defaultfontname.regular=IPAGothic -Dconfluence.document.conversion.slides.defaultfontname.asian=IPAGothic -Dconfluence.document.conversion.slides.defaultfontname.symbol=IPAGothic ${CATALINA_OPTS}"
 
 export CATALINA_OPTS
 

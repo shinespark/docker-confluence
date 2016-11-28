@@ -6,6 +6,7 @@ ENV CONFLUENCE_HOME     /var/atlassian/application-data/confluence
 ENV CONFLUENCE_INSTALL  /opt/atlassian/confluence
 ENV CONFLUENCE_CATALINA_MEM  1024
 ENV CONF_VERSION  5.10.8
+ENV JAVA_HOME           /usr/lib/jvm/java-8-openjdk-amd64/jre
 
 LABEL Description="This image is used to start Atlassian Confluence" Vendor="Atlassian" Version="${CONF_VERSION}"
 
@@ -22,7 +23,7 @@ ENV RUN_GROUP           daemon
 # directory structure.
 RUN set -x \
     && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends libtcnative-1 xmlstarlet \
+    && apt-get install --quiet --yes --no-install-recommends libtcnative-1 xmlstarlet fonts-ipafont-gothic\
     && apt-get clean \
     && mkdir -p                           "${CONFLUENCE_HOME}" \
     && chmod -R 700                       "${CONFLUENCE_HOME}" \
@@ -50,13 +51,18 @@ RUN set -x \
                                           "${CONFLUENCE_INSTALL}/conf/server.xml" \
     && touch -d "@0"                      "${CONFLUENCE_INSTALL}/conf/server.xml"
 
+# add font for macro title's font
+RUN mkdir -p "${JAVA_HOME}/lib/fonts/fallback"
+RUN ln -s /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf "${JAVA_HOME}/lib/fonts/fallback/ipag.ttf"
+
+# set Confluence settings
+COPY ./setenv.sh  ${CONFLUENCE_INSTALL}/bin/
+COPY ./server.xml ${CONFLUENCE_INSTALL}/conf/
+
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
 # here we only ever run one process anyway.
 USER ${RUN_USER}:${RUN_GROUP}
-
-COPY ./setenv.sh  ${CONFLUENCE_INSTALL}/bin/
-COPY ./server.xml ${CONFLUENCE_INSTALL}/conf/
 
 # Expose default HTTP connector port.
 EXPOSE 8090
