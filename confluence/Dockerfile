@@ -8,6 +8,9 @@ ENV CONFLUENCE_CATALINA_MEM  1024
 ENV CONF_VERSION  5.10.8
 ENV JAVA_HOME           /usr/lib/jvm/java-8-openjdk-amd64/jre
 
+ARG CONFLUENCE_HOSTNAME="confluence.local"
+ARG TIMEZONE="Asia/Tokyo"
+
 LABEL Description="This image is used to start Atlassian Confluence" Vendor="Atlassian" Version="${CONF_VERSION}"
 
 ENV CONFLUENCE_DOWNLOAD_URL http://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-${CONF_VERSION}.tar.gz
@@ -51,6 +54,9 @@ RUN set -x \
                                           "${CONFLUENCE_INSTALL}/conf/server.xml" \
     && touch -d "@0"                      "${CONFLUENCE_INSTALL}/conf/server.xml"
 
+# set timezone
+RUN sed -i -e "s|Etc/UTC|${TIMEZONE}|" /etc/timezone
+
 # add font for macro title's font
 RUN mkdir -p "${JAVA_HOME}/lib/fonts/fallback"
 RUN ln -s /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf "${JAVA_HOME}/lib/fonts/fallback/ipag.ttf"
@@ -58,6 +64,7 @@ RUN ln -s /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf "${JAVA_HOME}/lib/fo
 # set Confluence settings
 COPY ./setenv.sh  ${CONFLUENCE_INSTALL}/bin/
 COPY ./server.xml ${CONFLUENCE_INSTALL}/conf/
+RUN sed -i -e "s/confluence\.local/${CONFLUENCE_HOSTNAME}/" ${CONFLUENCE_INSTALL}/conf/server.xml
 
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
