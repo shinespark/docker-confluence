@@ -11,10 +11,28 @@ Composing of
 ## Change from Official
 
 * use nginx
+* use IPAGothic
 * Confluence 5.10.8
 
 ## How to use
 
+1. Change docker-compose.yml
+
+```diff
+    args:
+        CONFLUENCE_HOSTNAME: 'confluence.local'
+        TIMEZONE: 'Asia/Tokyo'
+    environment:
+      CONFLUENCE_CATALINA_MEM: 2048
+    extra_hosts:
+      - 'confluence.local:127.0.0.1'
 ```
-docker-compose up
+
+Note: Confluence needs to add own hostname in /etc/hosts for PDF Export.
+
+2. Up Docker Compose
+
+```zsh
+$ docker-compose up
 ```
+
