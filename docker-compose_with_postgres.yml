@@ -1,0 +1,34 @@
+version: '2'
+services:
+  nginx:
+    build: ./nginx
+    links:
+      - confluence
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  confluence:
+    build:
+      context: ./confluence
+      args:
+        CONFLUENCE_HOSTNAME: 'confluence.local'
+        TIMEZONE: 'Asia/Tokyo'
+    environment:
+      CONFLUENCE_CATALINA_MEM: 2048
+    extra_hosts:
+      - 'confluence.local:127.0.0.1'
+    links:
+      - postgres
+    ports:
+      - '8090:8090'
+    volumes:
+      - ./data/confluence-home:/var/atlassian/application-data/confluence
+  postgres:
+    build: ./postgres
+    ports:
+      - '5432:5432'
+    restart: always
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
