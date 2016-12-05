@@ -40,6 +40,7 @@ $ docker-compose up
 ### 3. Initial Settings
 
 Go to http://localhost:8090/confluence , and start initial settings.
+
 Note: The defalut proxy_connect_timeout is 60s. Therefore you need to access without nginx when initial settings.
 
 If you use PostgreSQL with Docker, use docker_compose_with_postgres.yml and following example.
