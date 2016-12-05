@@ -7,16 +7,18 @@ services:
     ports:
       - '80:80'
       - '443:443'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
   confluence:
     build:
       context: ./confluence
       args:
-        CONFLUENCE_HOSTNAME: 'localhost'
+        CONFLUENCE_HOSTNAME: 'confluence.local'
         TIMEZONE: 'Asia/Tokyo'
     environment:
       CONFLUENCE_CATALINA_MEM: 2048
     extra_hosts:
-      - 'localhost:127.0.0.1'
+      - 'confluence.local:127.0.0.1'
     ports:
       - '8090:8090'
     volumes:

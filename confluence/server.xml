@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Server port="8000" shutdown="SHUTDOWN">
   <Service name="Tomcat-Standalone">
-    <Connector port="8090" connectionTimeout="20000" redirectPort="8443" maxThreads="48" minSpareThreads="10" enableLookups="false" acceptCount="10" URIEncoding="UTF-8" protocol="org.apache.coyote.http11.Http11NioProtocol" proxyName="localhost" proxyPort="80"/>
+    <Connector port="8090" connectionTimeout="20000" redirectPort="8443" maxThreads="48" minSpareThreads="10" enableLookups="false" acceptCount="10" URIEncoding="UTF-8" protocol="org.apache.coyote.http11.Http11NioProtocol" proxyName="confluence.local" proxyPort="80"/>
     <Engine name="Standalone" defaultHost="localhost">
       <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="false">
         <Context path="/confluence" docBase="../confluence" reloadable="false" useHttpOnly="true">
