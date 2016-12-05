@@ -1,12 +1,13 @@
 # docker-confluence
 
-This repository is dockerize Confluence.
+This repository is a dockerize Confluence.
 Forked by https://bitbucket.org/atlassian/docker-atlassian-confluence-server
 
 Composing of
 
 * nginx
 * Confluence
+* PostgreSQL(optional)
 
 ## Change from Official
 
@@ -50,6 +51,10 @@ If you use PostgreSQL with Docker, use docker_compose_with_postgres.yml and foll
 | Password     | postgres                                 |
 
 You can change these name and password in docker-compose_with_postgres.yml.
+
+#### 4. Enjoy!
+
+Go to http://localhost/confluence !
 
 ## FAQ
 
