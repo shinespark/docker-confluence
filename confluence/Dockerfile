@@ -8,7 +8,7 @@ ENV CONFLUENCE_CATALINA_MEM  1024
 ENV CONF_VERSION  5.10.8
 ENV JAVA_HOME           /usr/lib/jvm/java-8-openjdk-amd64/jre
 
-ARG CONFLUENCE_HOSTNAME="confluence.local"
+ARG CONFLUENCE_HOSTNAME="localhost"
 ARG TIMEZONE="Asia/Tokyo"
 
 LABEL Description="This image is used to start Atlassian Confluence" Vendor="Atlassian" Version="${CONF_VERSION}"
@@ -64,7 +64,7 @@ RUN ln -s /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf "${JAVA_HOME}/lib/fo
 # set Confluence settings
 COPY ./setenv.sh  ${CONFLUENCE_INSTALL}/bin/
 COPY ./server.xml ${CONFLUENCE_INSTALL}/conf/
-RUN sed -i -e "s/confluence\.local/${CONFLUENCE_HOSTNAME}/" ${CONFLUENCE_INSTALL}/conf/server.xml
+RUN sed -i -e "4s/localhost/${CONFLUENCE_HOSTNAME}/" ${CONFLUENCE_INSTALL}/conf/server.xml
 
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but

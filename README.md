@@ -36,3 +36,12 @@ Note: Confluence needs to add own hostname in /etc/hosts for PDF Export.
 $ docker-compose up
 ```
 
+
+
+## FAQ
+
+Reset Data
+
+```zsh
+$ rm ./data/confluence-home/*
+```
