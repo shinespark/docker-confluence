@@ -64,3 +64,11 @@ Go to http://localhost/confluence !
 ```zsh
 $ rm ./data/confluence-home/*
 ```
+
+### Permission Error
+
+try chmod.
+
+```zsh
+$ chmod 777 ./data/confluence-home
+```
