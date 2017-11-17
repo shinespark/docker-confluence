@@ -67,7 +67,7 @@ $ rm ./data/confluence-home/*
 
 ### Permission Error
 
-try chmod.
+Try chmod.
 
 ```zsh
 $ chmod 777 ./data/confluence-home
